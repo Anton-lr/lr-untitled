@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
+import FileUploadPage from './FileUploadPage';
+import CodeViewer from './CodeViewer';
+import CodeEditor from './CodeEditor';
+import CodeAssembly from './CodeManager';
+import Navbar from "./Navbar";
 
 function App() {
+
+  const [current, setCurrent] = useState("TimeRemapper")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <Navbar setCurrent= {setCurrent}></Navbar>
       </header>
+      <header className="header">{current}</header>
+      <CodeViewer current={current}></CodeViewer>
     </div>
   );
 }

@@ -11,3 +11,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.setExpression{
+    color: rgb(0, 0, 0);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background-color: #89aee5;
+}
+
+.dataOperation {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 4
+}
+.dataInteract {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #89aee5;
+}
+
+.codeSection {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #89aee5;
+}
+
+.ui {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #89e58e;
+}
+
+.options {
+  color: rgb(0, 0, 0);
+  justify-content: space-evenly;
+  background-color: #e589d7;
+  }
+
+.options p {
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  background-color: #7be6f4;
+}
+
+
