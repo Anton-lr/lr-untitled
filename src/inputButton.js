@@ -1,12 +1,16 @@
+import {tsToFrames} from "./frameConversion"
+
 const InputButton = ({state, setState}) => {
     //offset, duration, initialData, targetData
+    
     const handleChange = event => {
         let v = event.target.value
-        //TODOOO
-        /*let va = JSON.parse(v)
+        let vl = Array.from(v)
+        if (vl[0] === "[" && vl[v.length - 1] === "]") {
+            console.log("its a list")
+            v = tsToFrames(JSON.parse(v))
+        }
         console.log(v)
-        console.log(va)
-        */
         setState(v)
     };
 
