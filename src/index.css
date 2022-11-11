@@ -35,10 +35,27 @@ code {
   background-color: #89aee5;
 }
 
+.manager{
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #4381dd;
+  min-width: 30vh;
+  min-height: 60vh;
+}
+
 .codeSection {
   color: rgb(0, 0, 0);
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #89aee5;
+}
+.combineCode {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   background-color: #89aee5;
 }
@@ -49,6 +66,7 @@ code {
   flex-direction: column;
   justify-content: space-evenly;
   background-color: #89e58e;
+  min-height: 40vh;
 }
 
 .options {
