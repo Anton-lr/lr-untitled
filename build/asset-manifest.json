@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/lr-code-editor/static/css/main.a6c961db.css",
+    "main.js": "/lr-code-editor/static/js/main.1c40b09f.js",
+    "index.html": "/lr-code-editor/index.html",
+    "main.a6c961db.css.map": "/lr-code-editor/static/css/main.a6c961db.css.map",
+    "main.1c40b09f.js.map": "/lr-code-editor/static/js/main.1c40b09f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a6c961db.css",
+    "static/js/main.1c40b09f.js"
+  ]
+}
