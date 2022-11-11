@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.setExpression{
+    color: rgb(0, 0, 0);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background-color: #89aee5;
+}
+
+.dataOperation {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 4
+}
+.dataInteract {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #89aee5;
+}
+
+.manager{
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #4381dd;
+  min-width: 30vh;
+  min-height: 60vh;
+}
+
+.codeSection {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #89aee5;
+}
+.combineCode {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #89aee5;
+}
+
+.ui {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #89e58e;
+  min-height: 40vh;
+}
+
+.options {
+  color: rgb(0, 0, 0);
+  justify-content: space-evenly;
+  background-color: #e589d7;
+  }
+
+.options p {
+  color: rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  background-color: #7be6f4;
+}
+
+
