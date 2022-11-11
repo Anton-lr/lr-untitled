@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 
-const CodeEditor = ({data, addData, deleteData }) => {
+const CodeEditor = ({data, addData, deleteData, type }) => {
 
     const [offset, setOffset] = useState("");
     const [duration, setDuration] = useState("");
@@ -17,11 +17,11 @@ const CodeEditor = ({data, addData, deleteData }) => {
     return (
         <div className="ui">
             <div className="options">
-                <p>offset<InputButton state={offset} setState={setOffset} /></p>
-                <p>duration<InputButton state={duration} setState={setDuration} /></p>
-                <p>start<InputButton state={initialData} setState={setInitialData} /></p>
-                <p>end<InputButton state={targetData} setState={setTargetData} /></p>
-                <p>expr<InputButton state={expr} setState={setExpr} /></p>
+                <p>offset<InputButton type={type} state={offset} setState={setOffset} /></p>
+                <p>duration<InputButton type={type} state={duration} setState={setDuration} /></p>
+                <p>start<InputButton type={type} state={initialData} setState={setInitialData} /></p>
+                <p>end<InputButton type={type} state={targetData} setState={setTargetData} /></p>
+                <p>expr<InputButton type={type} state={expr} setState={setExpr} /></p>
             </div>
             <div className= "setExpression">
                 <button onClick={() => setExpr("i / (d - 1)")}>linear</button>
@@ -35,7 +35,7 @@ const CodeEditor = ({data, addData, deleteData }) => {
                         parseInt(duration),
                         Number(initialData),
                         Number(targetData),
-                        expr))) }>add data</button>
+                        expr, type))) }>add data</button>
                 <button className="dataOperation" onClick={() => deleteData()}>delete data</button>
             </div>
         </div>
