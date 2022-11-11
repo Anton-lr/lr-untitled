@@ -16,8 +16,18 @@ export const framesToTs = (frames) => {
     return [m, s, parseInt(f)] //<p>[{m}, {s}, {f}]</p>
 }
 
-function printTs([m, s, f]) {
-    return <p>[{m}, {s}, {f}]</p>
+export const framesToTsString = (frames) => {
+    const m = Math.floor(frames / 2400) //frames 2400
+    frames = frames % 2400
+    const s = Math.floor(frames / 40)
+    const f = frames % 40
+    const st = "[" + { m } + { s } + { f } + "]"
+    return st
+}
+
+export const printTs = (list) => {
+    const s = list.toString()
+    return "[" + s + "]"
 }
 
 
@@ -25,7 +35,6 @@ export const createElement = (frame, data) => {
     if (typeof (frame) == "number") {
         frame = framesToTs(frame);
     }
-    console.log([frame, data]);
     return [frame, data];
 }
 
@@ -37,7 +46,6 @@ export const createEvent = (startFrame, endFrame, startData, endData) => {
     }
     let a = createElement(startFrame, startData);
     let b = createElement(endFrame, endData);
-    console.log([a, b])
 
     return [a, b]
 }
