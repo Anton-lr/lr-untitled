@@ -1,12 +1,31 @@
+import { framesToTs, tsToFrames } from './frameConversion';
 const Parser = require('expr-eval').Parser;
 
-function evaluator() {
-    const parser = new Parser();
-    let expr = parser.parse("i / t - 1^2")
+export const combineLists = (l1, l2) => {
+    const ret  = []
+    if (l1.length == l2.length) {
+        for (var i = 0; i<l1.length; i++) {
+            let temp = []
+            temp.push(l1[i])
+            temp.push(l2[i])
+            ret.push(temp)
+        }
+    }
+    console.log(ret)
+    return ret
 }
 
 //TODO: evalute using Parser from npm install expr-eval
-export const dataEvent = (offset, duration, start, end, expr) => {
+export const dataEvent = (offset, duration, start, end, expr, type) => {
+    const vals = []
+    console.log("s: ", start)
+    console.log("e: ", end)
+    console.log("d: ", duration)
+    if (isNaN(duration) && (start === 0 || end === 0)) {
+        console.log("detected")
+        vals.push(framesToTs(Math.max(start, end)))
+        return vals;
+    }
 
     if (isNaN(duration)) {
         duration = Math.abs(end - start) + 1
@@ -16,16 +35,22 @@ export const dataEvent = (offset, duration, start, end, expr) => {
         console.log(offset)
     }  
 
-    const vals = []
+ 
+
+
+
     const parser = new Parser();
     let e = parser.parse(expr)
     
     for (var i = 0; i < duration; i++) {
         let s = e.evaluate({ i: i, d:duration })
-        const d = Number(offset) + s * (end - start)
+        let d = Number(offset) + s * (end - start)
+        if (type === "keyframes") {
+            d = framesToTs(d)
+        }
         vals.push(d)
     }
-    console.log(vals)
+
     return vals
     /*
     for (var i = 0; i < duration; i++) {
