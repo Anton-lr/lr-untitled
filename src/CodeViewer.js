@@ -11,11 +11,14 @@ const CodeViewer = ({ current }) => {
 
     return (
         <div>
-            {current == "TimeRemapper"  && <CodeManager name="TimeRemapper" setCode={setTimeRemapper} code={TimeRemapper} />}
-            {current == "Focuser"       && <CodeManager name="Focuser" setCode={setFocuser} code={Focuser} />}
-            {current == "BoundsPanner"  && <CodeManager name="BoundsPanner" setCode={setBoundsPanner} code={BoundsPanner} />}
-            {current == "Zoomer"        && <CodeManager name="Zoomer" setCode={setZoomer} code={Zoomer} />}
-            {TimeRemapper}
+
+            <div>
+                {current == "TimeRemapper"  && <CodeManager name="TimeRemapper" setCode={setTimeRemapper} code={TimeRemapper} />}
+                {current == "Focuser"       && <CodeManager name="Focuser" setCode={setFocuser} code={Focuser} />}
+                {current == "BoundsPanner"  && <CodeManager name="BoundsPanner" setCode={setBoundsPanner} code={BoundsPanner} />}
+                {current == "Zoomer"        && <CodeManager name="Zoomer" setCode={setZoomer} code={Zoomer} />}
+            </div>
+            
         </div>
     )
 }
