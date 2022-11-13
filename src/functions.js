@@ -11,37 +11,40 @@ export const combineLists = (l1, l2) => {
             ret.push(temp)
         }
     }
-    console.log(ret)
+    return ret
+}
+
+export const createBoundsObj = (l1, l2, l3, l4) => {
+    const ret = []
+    for (var i = 0; i < l1.length; i++) {
+        let temp = {}
+        temp["w"]=  l1[i]
+        temp["h"] = l2[i]
+        temp["x"] = l3[i]
+        temp["y"] = l4[i]
+        ret.push(temp)
+    }
     return ret
 }
 
 //TODO: evalute using Parser from npm install expr-eval
 export const dataEvent = (offset, duration, start, end, expr, type) => {
     const vals = []
-    console.log("s: ", start)
-    console.log("e: ", end)
-    console.log("d: ", duration)
     if (isNaN(duration) && (start === 0 || end === 0)) {
-        console.log("detected")
-        vals.push(framesToTs(Math.max(start, end)))
+        if (type === "keyframes") {
+            vals.push(framesToTs(Math.max(start, end) + Number(offset)) )
+            return vals;
+        }
+        const a = Math.max(start, end) + Number(offset)
+        vals.push(a)
         return vals;
     }
-
     if (isNaN(duration)) {
         duration = Math.abs(end - start) + 1
     }
-    if (offset === "") {
-        offset = start
-        console.log(offset)
-    }  
-
- 
-
-
-
+    offset = Number(offset) + start
     const parser = new Parser();
     let e = parser.parse(expr)
-    
     for (var i = 0; i < duration; i++) {
         let s = e.evaluate({ i: i, d:duration })
         let d = Number(offset) + s * (end - start)
@@ -50,7 +53,6 @@ export const dataEvent = (offset, duration, start, end, expr, type) => {
         }
         vals.push(d)
     }
-
     return vals
     /*
     for (var i = 0; i < duration; i++) {
@@ -65,22 +67,24 @@ export const dataEvent = (offset, duration, start, end, expr, type) => {
     */
 }
 
-function linear(offset, duration, start, end) {
-    const vals = []
-    for (var i = 0; i < duration; i++) {
-        const k = (i / (duration - 1))
-        const d = offset + k * (end - start)
-        vals.push(d)
-    }
-    return vals
+
+export function myStringify(obj) {
+    const json = JSON.stringify(obj);  // {"name":"John Smith"}
+    const unquoted = json.replace(/"([^"]+)":/g, '$1:');
+    return unquoted;
 }
 
-function exponential(offset, duration, start, end) {
-    const vals = []
-    for (var i = 0; i < duration; i++) {
-        const k = (i / (duration - 1)) ** 2
-        const d = offset + k * (end - start)
-        vals.push(d)
-    }
-    return vals
+export function myFunction(elementID) {
+    // Get the text field
+    var copyText = document.getElementById(elementID);
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    // Alert the copied text
+    alert("Copied the text: " + copyText.value);
 }
