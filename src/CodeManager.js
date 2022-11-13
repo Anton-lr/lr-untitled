@@ -1,90 +1,79 @@
 import { useState, useEffect } from 'react';
 import CodeEditor from './CodeEditor';
 import { framesToTs, framesToTsString , printTs } from "./frameConversion";
-import { combineLists } from './functions';
+import { combineLists, createBoundsObj, myStringify, myFunction } from './functions';
 import Printer from './Printer';
 
-
 const CodeManager = ({name, code, setCode }) => {
-
-    const [keyframes, setKeyframes] = useState([])
+    const [keyframes, setKeyframes] = useState([[0]])
     const [values, setValues] = useState([])
-
     const [width, setWidth] = useState([])
     const [height, setHeight] = useState([])
     const [x, setX] = useState([])
     const [y, setY] = useState([])
+    const [string, setString] = useState("")
 
-    let k = ""
-    let v = ""
-    useEffect(() => {
-
-    }, [keyframes, values])
-
-
-    function save() {
-        const a = combineLists(keyframes, values)
-        console.log(a)
-        setCode(a)
-    }
-
-    function myPrint(list, type = "v") {
-        const vals = []
-        for (var i = 0; i < list.length; i++) {
-            let d = list[i]
-            if (type == "keyframes") {
-                d = printTs(list[i])
-            }
-            if (type == "code") {
-                d = "[" + printTs(list[i][0]) + ", " + list[i][1] + "]"
-            }
-            vals.push(
-                <div className="vitem" id={i}>
-                    
-                    {d}
-                </div>)
+    function save (add = false) {
+        console.log(code)
+        if (name === "BoundsPanner") {
+            const a = createBoundsObj(width, height, x, y)
+            setValues(a)
         }
-        return vals
-    }
-    //<button className="deleteBelow" i={i} onClick={() => db(code, i)}> delete below </button>
-    //<button className="removeElement" i={i} onClick={() => ri(code, i)}> remove element </button>
+        let a = combineLists(keyframes, values)
+        if (add) {
+            a = code.concat(a)
+        }
+        setCode(a)
 
-    function db(list, i) {
-   
-        const dd = code.slice(0, i)
-        console.log("DELETED ??? ", i)
-   
-        setCode(dd)
+        let o = ""
+        if (name === "TimeRemapper") {
+            o = "timeRemapper = createTimeRemapper([" + myStringify(code) + "]) " + "\n"
+        }
+        if (name === "Focuser") {
+            o = "getCamFocus = createFocuser([" + myStringify(code) + "]) " + "\n"
+        }
+        if (name === "Zoomer") {
+            o = "getAutoZoom = createZoomer([" + myStringify(code) + "]) " + "\n"
+        }
+        if (name === "BoundsPanner") {
+            o = "getCamBounds = createBoundsPanner([" + myStringify(code) + "])" + "\n"
+        }
+
+        setString(o)
     }
 
-    function ri(list, i) {
-        const ed = list.slice(0, i).concat(list.slice(i + 1, list.length))
-        setCode(ed)
-    }
-
+ 
 
     return (
         <div className="testicles">
   
             <div className="codeSection">
-                                                <div className="manager">Keyframes  <CodeEditor type="keyframes" data={keyframes} addData={setKeyframes} deleteData={() => setKeyframes([])} /> <p className="display">{myPrint(keyframes, "keyframes")}</p></div>
-                {name !== "BoundsPanner" &&     <div className="manager">Values     <CodeEditor type="values" data={values} addData={setValues} deleteData={() => setValues([])} /> <p className="display">{myPrint(values)}</p></div>}
-                {name === "BoundsPanner" && <div className="manager">Width      <CodeEditor type="width" addData={setWidth} deleteData={() => setWidth([])} /><p className="display"> {width}</p></div>}
-                {name === "BoundsPanner" && <div className="manager">Height     <CodeEditor type="height" addData={setHeight} deleteData={() => setHeight([])} /><p className="display"> {height}</p></div>}
-                {name === "BoundsPanner" && <div className="manager">X          <CodeEditor type="x" addData={setX} deleteData={() => setX([])} /><p className="display"> {x}</p></div>}
-                {name === "BoundsPanner" && <div className="manager">Y          <CodeEditor type="y" addData={setY} deleteData={() => setY([])} /><p className="display"> {y}</p></div>}
+                <div className="manager">Keyframes  <CodeEditor type="keyframes" data={keyframes} addData={setKeyframes} deleteData={() => setKeyframes([])} /></div>
+                {name !== "BoundsPanner" && <div className="manager">Values     <CodeEditor type="values" data={values} addData={setValues} deleteData={() => setValues([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager">Width     <CodeEditor type="width" data={width} addData={setWidth} deleteData={() => setWidth([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager">Height     <CodeEditor type="height" data = {height} addData={setHeight} deleteData={() => setHeight([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager">X          <CodeEditor type="x" data={x} addData={setX} deleteData={() => setX([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager">Y          <CodeEditor type="y" data={y} addData={setY} deleteData={() => setY([])} /></div>}
+                
                 <div className="manager">
                     Current code
-
-                    <button className="save" onClick={() => save(keyframes, values)}>save</button>
-                    <button className="delete" onClick={() => setCode([])}>delete</button>
-                    <p className="display"> {myPrint(code, "code")}</p>
-       
+                    <div className="ui">
+                        <div className="interact">
+                            <div className="dataInteract">
+                                <button className="save" onClick={() => save()}>save</button>
+                                <button className="delete" onClick={() => setCode([])}>delete</button>
+                                <button className="delete" onClick={() => save(true)}>add</button>
+                                <button onClick={() => myFunction("copier")}>Copy text</button>
+                                <input defaultValue={string} type="hidden" className="copyToClipboard" id="copier"></input>
+                            </div>
+                        </div>
+                        <div className="display">
+                            <Printer className="display" data={code} setData={setCode} type={"code"} />
+                        </div>
+                    </div>
+                    
                 </div>
-                
-         
             </div>
-
         </div>
     )
 }
