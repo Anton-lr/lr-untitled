@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 
 function App() {
 
-  const [current, setCurrent] = useState("TimeRemapper")
+  const [current, setCurrent] = useState("BoundsPanner")
 
   return (
     <div className="App">
