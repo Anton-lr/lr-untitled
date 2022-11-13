@@ -14,7 +14,7 @@ const InputButton = ({state, setState, type}) => {
     };
 
     return (
-        <input
+        <input className="userInput"
             type="text"
             id={state}
             name={state}
