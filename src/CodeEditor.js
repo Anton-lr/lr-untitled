@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import { dataEvent } from "./functions.js"
 import InputButton from './inputButton.js';
-import dropdown from "./dropdown";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-
+import Printer from './Printer.js';
 
 const CodeEditor = ({data, addData, deleteData, type }) => {
 
@@ -16,27 +13,32 @@ const CodeEditor = ({data, addData, deleteData, type }) => {
 
     return (
         <div className="ui">
-            <div className="options">
-                <p>offset<InputButton type={type} state={offset} setState={setOffset} /></p>
-                <p>duration<InputButton type={type} state={duration} setState={setDuration} /></p>
-                <p>start<InputButton type={type} state={initialData} setState={setInitialData} /></p>
-                <p>end<InputButton type={type} state={targetData} setState={setTargetData} /></p>
-                <p>expr<InputButton type={type} state={expr} setState={setExpr} /></p>
+            <div className="interact">
+                <div className="options">
+                    <div><InputButton type={type} state={offset} setState={setOffset} /><div>offset</div></div>
+                    <div><InputButton type={type} state={duration} setState={setDuration} /><div>duration</div></div>
+                    <div><InputButton type={type} state={initialData} setState={setInitialData} /><div>start</div></div>
+                    <div><InputButton type={type} state={targetData} setState={setTargetData} /><div>end</div></div>
+                    <div><InputButton type={type} state={expr} setState={setExpr} /><div>expr</div></div>
+                </div>
+                <div className= "setExpression">
+                    <button className="expression" onClick={() => setExpr("i / (d - 1)")}>/ line</button>
+                    <button className="expression" onClick={() => setExpr("(i / (d - 1))^ 2")}>┌ curve </button>
+                    <button className="expression" onClick={() => setExpr("1 - (1 - i / (d - 1))^ 2")}>┘ curve </button>
+                </div>
+                <div className="dataInteract">
+                    <button className="dataOperation" onClick={() => addData(data.concat(
+                        dataEvent(
+                            offset,
+                            parseInt(duration),
+                            Number(initialData),
+                            Number(targetData),
+                            expr, type))) }>add data</button>
+                    <button className="dataOperation" onClick={() => deleteData()}>delete data</button>
+                </div>
             </div>
-            <div className= "setExpression">
-                <button onClick={() => setExpr("i / (d - 1)")}>linear</button>
-                <button onClick={() => setExpr("(i / (d - 1))^ 2")}>exponential increase </button>
-                <button onClick={() => setExpr("1 - (1 - i / (d - 1))^ 2")}>exponential decrease </button>
-            </div>
-            <div className="dataInteract">
-                <button className="dataOperation" onClick={() => addData(data.concat(
-                    dataEvent(
-                        offset,
-                        parseInt(duration),
-                        Number(initialData),
-                        Number(targetData),
-                        expr, type))) }>add data</button>
-                <button className="dataOperation" onClick={() => deleteData()}>delete data</button>
+            <div className="display">
+                <Printer data={data} setData={addData} type={type} />
             </div>
         </div>
     )
