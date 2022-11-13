@@ -13,6 +13,24 @@ const CodeManager = ({name, code, setCode }) => {
     const [y, setY] = useState([])
     const [string, setString] = useState("")
 
+
+    useEffect(() => {
+        let o = ""
+        if (name === "TimeRemapper") {
+            o = "timeRemapper = createTimeRemapper(" + myStringify(code) + ") " + "\n"
+        }
+        if (name === "Focuser") {
+            o = "getCamFocus = createFocuser(" + myStringify(code) + ") " + "\n"
+        }
+        if (name === "Zoomer") {
+            o = "getAutoZoom = createZoomer(" + myStringify(code) + ") " + "\n"
+        }
+        if (name === "BoundsPanner") {
+            o = "getCamBounds = createBoundsPanner(" + myStringify(code) + ")" + "\n"
+        }
+        setString(o)
+    }, [code])
+
     function save (add = false) {
         console.log(code)
         if (name === "BoundsPanner") {
@@ -24,25 +42,9 @@ const CodeManager = ({name, code, setCode }) => {
             a = code.concat(a)
         }
         setCode(a)
-
-        let o = ""
-        if (name === "TimeRemapper") {
-            o = "timeRemapper = createTimeRemapper([" + myStringify(code) + "]) " + "\n"
-        }
-        if (name === "Focuser") {
-            o = "getCamFocus = createFocuser([" + myStringify(code) + "]) " + "\n"
-        }
-        if (name === "Zoomer") {
-            o = "getAutoZoom = createZoomer([" + myStringify(code) + "]) " + "\n"
-        }
-        if (name === "BoundsPanner") {
-            o = "getCamBounds = createBoundsPanner([" + myStringify(code) + "])" + "\n"
-        }
-
-        setString(o)
+        
     }
-
- 
+    
 
     return (
         <div className="testicles">
@@ -64,14 +66,13 @@ const CodeManager = ({name, code, setCode }) => {
                                 <button className="delete" onClick={() => setCode([])}>delete</button>
                                 <button className="delete" onClick={() => save(true)}>add</button>
                                 <button onClick={() => myFunction("copier")}>Copy text</button>
-                                <input defaultValue={string} type="hidden" className="copyToClipboard" id="copier"></input>
+                                <input defaultValue={string} className="copyToClipboard" id="copier"></input>
                             </div>
                         </div>
                         <div className="display">
                             <Printer className="display" data={code} setData={setCode} type={"code"} />
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>

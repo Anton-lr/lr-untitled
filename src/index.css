@@ -17,6 +17,7 @@ code {
 .header {
   color: black;
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
   grid-area: header;
   background-color: #A0ACBD;
@@ -53,7 +54,7 @@ code {
   display: flex;
   flex-direction: column;
 
-  padding:1vh;
+  padding:0.5vh;
 
 }
 
@@ -91,6 +92,11 @@ code {
 .display {
     outline: 3px solid rgb(77, 126, 189);
     padding: 1vh;
+}
+
+a {
+    display: flex;
+    justify-content: center;
 }
 
 .options div {
@@ -150,8 +156,8 @@ button{
   text-align: center;
   cursor: pointer;
   padding: 0px 4px;
-
-  min-width: 80px;
+  
+  min-width: 30px;
   height: 32px;
   background-color: rgb(255, 255, 255);
   color: rgb(50, 49, 48);
