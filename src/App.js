@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 
 function App() {
 
-  const [current, setCurrent] = useState("BoundsPanner")
+  const [current, setCurrent] = useState("")
 
   return (
     <div className="App">
