@@ -55,7 +55,7 @@ const Keyframes = ({ data, addData,  deleteData, type }) => {
     }
 
     const set = () => {
-        const d = generateList(start, end, interval, offset, repetitions)
+        const d = generateList(Number(start), Number(end), Number(interval), Number(offset))
         addData(d)
     }
 
