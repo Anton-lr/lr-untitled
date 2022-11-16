@@ -1,9 +1,6 @@
 import './App.css';
 import { useState } from 'react'
-import FileUploadPage from './FileUploadPage';
 import CodeViewer from './CodeViewer';
-import CodeEditor from './CodeEditor';
-import CodeAssembly from './CodeManager';
 import Navbar from "./Navbar";
 
 function App() {
