@@ -33,14 +33,22 @@ const CodeEditor = ({data, addData, deleteData, type }) => {
                             parseInt(duration),
                             Number(initialData),
                             Number(targetData),
-                            expr, type))) }>add data</button>
-                    <button className="dataOperation" onClick={() => deleteData()}>delete data</button>
+                            expr, type))) }>Add</button>
+                    <button className="dataOperation" onClick={() => addData(
+                        dataEvent(
+                            offset,
+                            parseInt(duration),
+                            Number(initialData),
+                            Number(targetData),
+                            expr, type))}>Set</button>
+                    <button className="dataOperation" onClick={() => deleteData()}>Delete</button>
                 </div>
             </div>
             <div className="display">
                 <Printer data={data} setData={addData} type={type} />
             </div>
         </div>
+   
     )
 }
 
