@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import CodeEditor from './CodeEditor';
-import { framesToTs, framesToTsString , printTs } from "./frameConversion";
 import { combineLists, createBoundsObj, myStringify, myFunction } from './functions';
 import Printer from './Printer';
+import Keyframes from './Keyframes'
 
 const CodeManager = ({name, code, setCode }) => {
     const [keyframes, setKeyframes] = useState([[0]])
@@ -37,6 +37,8 @@ const CodeManager = ({name, code, setCode }) => {
             const a = createBoundsObj(width, height, x, y)
             setValues(a)
         }
+        console.log(values.length)
+        console.log(keyframes.length)
         let a = combineLists(keyframes, values)
         if (add) {
             a = code.concat(a)
@@ -45,35 +47,43 @@ const CodeManager = ({name, code, setCode }) => {
         
     }
     
-
+    //<div className="manager">Keyframes  <CodeEditor type="keyframes" data={keyframes} addData={setKeyframes} deleteData={() => setKeyframes([])} /></div>
     return (
         <div className="testicles">
   
             <div className="codeSection">
-                <div className="manager">Keyframes  <CodeEditor type="keyframes" data={keyframes} addData={setKeyframes} deleteData={() => setKeyframes([])} /></div>
-                {name !== "BoundsPanner" && <div className="manager">Values     <CodeEditor type="values" data={values} addData={setValues} deleteData={() => setValues([])} /></div>}
-                {name === "BoundsPanner" && <div className="manager">Width     <CodeEditor type="width" data={width} addData={setWidth} deleteData={() => setWidth([])} /></div>}
-                {name === "BoundsPanner" && <div className="manager">Height     <CodeEditor type="height" data = {height} addData={setHeight} deleteData={() => setHeight([])} /></div>}
-                {name === "BoundsPanner" && <div className="manager">X          <CodeEditor type="x" data={x} addData={setX} deleteData={() => setX([])} /></div>}
-                {name === "BoundsPanner" && <div className="manager">Y          <CodeEditor type="y" data={y} addData={setY} deleteData={() => setY([])} /></div>}
-                
                 <div className="manager">
-                    Current code
+                    <p>Keyframes</p>
+                    <Keyframes data={keyframes} addData={setKeyframes} type="keyframes" />
+                </div>
+               <div className="manager main">
+                    <p>Current code</p>
                     <div className="ui">
                         <div className="interact">
                             <div className="dataInteract">
-                                <button className="save" onClick={() => save()}>save</button>
-                                <button className="delete" onClick={() => setCode([])}>delete</button>
-                                <button className="delete" onClick={() => save(true)}>add</button>
+                                <button className="dataOperation" onClick={() => save(true)}>Add</button>
+                                <button className="dataOperation" onClick={() => save()}>Set</button>
+                                <button className="dataOperation" onClick={() => setCode([])}>Delete</button>
+                            </div>
+                            <div className="dataInteract">
                                 <button onClick={() => myFunction("copier")}>Copy text</button>
                                 <input defaultValue={string} className="copyToClipboard" id="copier"></input>
+                                <button>read (wip)</button>
                             </div>
                         </div>
                         <div className="display">
-                            <Printer className="display" data={code} setData={setCode} type={"code"} />
+                            <Printer data={code} setData={setCode} type="code" />
                         </div>
                     </div>
+
                 </div>
+
+                {name !== "BoundsPanner" && <div className="manager"><p>Values</p>     <CodeEditor type="values" data={values} addData={setValues} deleteData={() => setValues([])} /> </div>}
+                {name === "BoundsPanner" && <div className="manager"><p>Width</p>      <CodeEditor type="width" data={width} addData={setWidth} deleteData={() => setWidth([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager"><p>Height</p>     <CodeEditor type="height" data={height} addData={setHeight} deleteData={() => setHeight([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager"><p>X</p>          <CodeEditor type="x" data={x} addData={setX} deleteData={() => setX([])} /></div>}
+                {name === "BoundsPanner" && <div className="manager"><p>Y </p>         <CodeEditor type="y" data={y} addData={setY} deleteData={() => setY([])} /></div>}
+
             </div>
         </div>
     )
