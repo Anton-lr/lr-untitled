@@ -10,14 +10,15 @@ const InputButton = ({state, setState, type}) => {
             console.log("its a list")
             v = tsToFrames(JSON.parse(v))
         }   
+        console.log(v)
         setState(v)
     };
 
     return (
         <input className="userInput"
             type="text"
-            id={state}
-            name={state}
+            id={type}
+            name={type}
             onChange={handleChange}
             value={state}
             />
