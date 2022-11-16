@@ -1,17 +1,21 @@
-import { framesToTs, tsToFrames } from './frameConversion';
+import { framesToTs } from './frameConversion';
 const Parser = require('expr-eval').Parser;
 
 export const combineLists = (l1, l2) => {
     const ret  = []
-    if (l1.length == l2.length) {
+    if (l1.length === l2.length) {
         for (var i = 0; i<l1.length; i++) {
             let temp = []
             temp.push(l1[i])
             temp.push(l2[i])
             ret.push(temp)
         }
+        return ret
     }
-    return ret
+    
+    alert("lengths of 'keyframes' and 'values' must be of the same length'")
+    return []
+    
 }
 
 export const createBoundsObj = (l1, l2, l3, l4) => {

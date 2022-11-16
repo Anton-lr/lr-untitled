@@ -32,13 +32,11 @@ const CodeManager = ({name, code, setCode }) => {
     }, [code])
 
     function save (add = false) {
-        console.log(code)
+
         if (name === "BoundsPanner") {
             const a = createBoundsObj(width, height, x, y)
             setValues(a)
         }
-        console.log(values.length)
-        console.log(keyframes.length)
         let a = combineLists(keyframes, values)
         if (add) {
             a = code.concat(a)
@@ -50,28 +48,28 @@ const CodeManager = ({name, code, setCode }) => {
     //<div className="manager">Keyframes  <CodeEditor type="keyframes" data={keyframes} addData={setKeyframes} deleteData={() => setKeyframes([])} /></div>
     return (
         <div className="testicles">
-  
             <div className="codeSection">
                 <div className="manager">
                     <p>Keyframes</p>
                     <Keyframes data={keyframes} addData={setKeyframes} type="keyframes" />
                 </div>
-               <div className="manager main">
+            <div className="manager main">
                     <p>Current code</p>
                     <div className="ui">
                         <div className="interact">
-                            <div className="dataInteract">
-                                <button className="dataOperation" onClick={() => save(true)}>Add</button>
-                                <button className="dataOperation" onClick={() => save()}>Set</button>
-                                <button className="dataOperation" onClick={() => setCode([])}>Delete</button>
-                            </div>
                             <div className="dataInteract">
                                 <button onClick={() => myFunction("copier")}>Copy text</button>
                                 <input defaultValue={string} className="copyToClipboard" id="copier"></input>
                                 <button>read (wip)</button>
                             </div>
+                            <div className="dataInteract">
+                                <button className="dataOperation" onClick={() => save(true)}>Add</button>
+                                <button className="dataOperation" onClick={() => save()}>Set</button>
+                                <button className="dataOperation" onClick={() => setCode([])}>Delete</button>
+                            </div>
                         </div>
                         <div className="display">
+                            length: {code.length}
                             <Printer data={code} setData={setCode} type="code" />
                         </div>
                     </div>

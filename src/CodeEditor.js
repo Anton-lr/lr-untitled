@@ -22,7 +22,7 @@ const CodeEditor = ({data, addData, deleteData, type }) => {
                     <div><InputButton type={type} state={expr} setState={setExpr} /><div>expr</div></div>
                 </div>
                 <div className= "setExpression">
-                    <button className="expression" onClick={() => setExpr("i / (d - 1)")}>/ line</button>
+                    <button className="expression" onClick={() => setExpr("i / (d - 1)")}>/ linear </button>
                     <button className="expression" onClick={() => setExpr("(i / (d - 1))^ 2")}>┌ curve </button>
                     <button className="expression" onClick={() => setExpr("1 - (1 - i / (d - 1))^ 2")}>┘ curve </button>
                 </div>
@@ -45,6 +45,7 @@ const CodeEditor = ({data, addData, deleteData, type }) => {
                 </div>
             </div>
             <div className="display">
+                length: {data.length}
                 <Printer data={data} setData={addData} type={type} />
             </div>
         </div>

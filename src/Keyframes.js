@@ -20,7 +20,7 @@ const Keyframes = ({ data, addData,  deleteData, type }) => {
             return []
         }
         if (interval===0) {
-            
+            alert("interval cannot be 0")
             return []
         }
         if (interval > end - start) {
@@ -73,19 +73,19 @@ const Keyframes = ({ data, addData,  deleteData, type }) => {
                     <div><InputButton type={type} state={end} setState={setEnd} /><div>end</div></div>
                 </div>
                 <div className="dataInteract">
-                    <button className="dataOperation" onClick={() => add()}>Add</button>
-                    <button className="dataOperation" onClick={() => set()}>Set</button>
-                    <button className="dataOperation" onClick={() => addData([0])}>Delete</button>
-                </div>
-                <div className="dataInteract">
                     <button className="dataOperation" onClick={() => updateOffset()}>set offset to last frame</button>
-
                 </div>
                 <div className="dataInteract">
                     <button className="dataOperation" onClick={() => addSingle()}>add "start" as single frame</button>
                 </div>
+                <div className="dataInteract">
+                    <button className="dataOperation" onClick={() => add()}>Add</button>
+                    <button className="dataOperation" onClick={() => set()}>Set</button>
+                    <button className="dataOperation" onClick={() => addData([0])}>Delete</button>
+                </div>
             </div>
             <div className="display">
+                length: {data.length}
                 <Printer data={data} setData={addData} type={type} />
             </div>
         </div>
