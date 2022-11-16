@@ -36,19 +36,16 @@ const Keyframes = ({ data, addData,  deleteData, type }) => {
                 break
             }
         }
-        console.log(JSON.stringify(ret))
         addData(ret)
         return ret
     }
 
     const updateOffset = () => {
         setOffset(tsToFrames(data[data.length - 1]))
-        console.log("offset: ", offset)
     }
 
     function addSingle() {
         const d = framesToTs(Number(start) + Number(offset))
-        console.log(d)
         addData(data.concat([d]))
     }
 

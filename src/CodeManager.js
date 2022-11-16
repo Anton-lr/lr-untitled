@@ -32,7 +32,6 @@ const CodeManager = ({name, code, setCode }) => {
     }, [code])
 
     function save (add = false) {
-
         if (name === "BoundsPanner") {
             const a = createBoundsObj(width, height, x, y)
             setValues(a)

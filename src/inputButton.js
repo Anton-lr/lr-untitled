@@ -7,10 +7,8 @@ const InputButton = ({state, setState, type}) => {
         let v = event.target.value
         let vl = Array.from(v)
         if (vl[0] === "[" && vl[v.length - 1] === "]") {
-            console.log("its a list")
             v = tsToFrames(JSON.parse(v))
         }   
-        console.log(v)
         setState(v)
     };
 
